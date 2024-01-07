@@ -1,0 +1,158 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Course {
+public:
+    string courseName;
+    double fees;
+
+    Course(const string& name, double fees) : courseName(name), fees(fees) {}
+};
+
+class Student {
+public:
+    string name;
+    int rollNo;
+    string mobile;
+    vector<Course> courses;
+
+    Student(const string& studentName, int roll, const string& mobileNum)
+        : name(studentName), rollNo(roll), mobile(mobileNum) {}
+
+    void takeCourse(const Course& course) {
+        courses.push_back(course);
+    }
+
+    void displayTakenCourses() const {
+        cout << "Courses taken by " << name << " (Roll No: " << rollNo << "):\n";
+        for (const auto& course : courses) {
+            cout << "  - " << course.courseName << " (Fees: $" << course.fees << ")\n";
+        }
+        cout << endl;
+    }
+};
+
+class AdmissionSystem {
+private:
+    vector<Student> students;
+    vector<Course> availableCourses;
+
+public:
+    void registerStudent(const string& name, int rollNo, const string& mobile) {
+        students.push_back(Student(name, rollNo, mobile));
+    }
+
+    void addCourse(const string& courseName, double fees) {
+        availableCourses.push_back(Course(courseName, fees));
+    }
+
+    void takeCourse(int rollNo, const string& courseName) {
+        auto studentIt = findStudent(rollNo);
+        if (studentIt != students.end()) {
+            auto courseIt = findCourse(courseName);
+            if (courseIt != availableCourses.end()) {
+                studentIt->takeCourse(*courseIt);
+                cout << "Course added successfully.\n";
+            } else {
+                cout << "Course not found.\n";
+            }
+        } else {
+            cout << "Student not found.\n";
+        }
+    }
+
+    void displayStudentCourses(int rollNo) {
+        auto studentIt = findStudent(rollNo);
+        if (studentIt != students.end()) {
+            studentIt->displayTakenCourses();
+        } else {
+            cout << "Student not found.\n";
+        }
+    }
+
+    void displayAllStudents() const {
+        cout << "All registered students and their courses:\n";
+        for (const auto& student : students) {
+            cout << "----------------------------------------\n";
+            cout << "Name: " << student.name << "\n";
+            cout << "Roll No: " << student.rollNo << "\n";
+            cout << "Mobile: " << student.mobile << "\n";
+            student.displayTakenCourses();
+        }
+        cout << "----------------------------------------\n";
+    }
+
+private:
+    vector<Student>::iterator findStudent(int rollNo) {
+        return find_if(students.begin(), students.end(),
+                            [rollNo](const Student& student) { return student.rollNo == rollNo; });
+    }
+
+    vector<Course>::iterator findCourse(const string& courseName) {
+        return find_if(availableCourses.begin(), availableCourses.end(),
+                            [courseName](const Course& course) { return course.courseName == courseName; });
+    }
+};
+
+int main() {
+    AdmissionSystem admissionSystem;
+
+    // Adding some initial courses
+    admissionSystem.addCourse("Math", 500);
+    admissionSystem.addCourse("Science", 600);
+    admissionSystem.addCourse("English", 450);
+
+    int choice;
+    do {
+        cout << "Menu:\n";
+        cout << "1. Register Student\n";
+        cout << "2. Take Course\n";
+        cout << "3. Display specific student's taken courses\n";
+        cout << "4. Display all students and their courses registered\n";
+        cout << "0. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                string name, mobile;
+                int rollNo;
+                cout << "Enter student name: ";
+                cin >> name;
+                cout << "Enter roll number: ";
+                cin >> rollNo;
+                cout << "Enter mobile number: ";
+                cin >> mobile;
+                admissionSystem.registerStudent(name, rollNo, mobile);
+                break;
+            }
+            case 2: {
+                string courseName;
+                int rollNo;
+                cout << "Enter roll number: ";
+                cin >> rollNo;
+                cout << "Enter course name: ";
+                cin >> courseName;
+                admissionSystem.takeCourse(rollNo, courseName);
+                break;
+            }
+            case 3: {
+                int rollNo;
+                cout << "Enter roll number: ";
+                cin >> rollNo;
+                admissionSystem.displayStudentCourses(rollNo);
+                break;
+            }
+            case 4:
+                admissionSystem.displayAllStudents();
+                break;
+            case 0:
+                cout << "Exiting program.\n";
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 0);
+
+    return 0;
+}

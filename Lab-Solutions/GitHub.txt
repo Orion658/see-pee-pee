@@ -1,0 +1,12 @@
+Step 1: git init
+
+Step 2: git add ReverseNumber.java Dockerfile
+
+Step 3: git commit -m "Initial commit"
+
+// Create a GitHub Repository
+
+Step 4: git remote add origin https://github.com/your-username/your-repo.git
+
+Step 5: git push -u origin master
+

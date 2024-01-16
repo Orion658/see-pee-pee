@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: automation_testing.LoginTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.465 s -- in automation_testing.LoginTest

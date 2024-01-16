@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-01-16T11:57:35 IST" name="Surefire suite" finished-at="2024-01-16T11:57:41 IST" duration-ms="5969">
+    <groups>
+    </groups>
+    <test started-at="2024-01-16T11:57:35 IST" name="Surefire test" finished-at="2024-01-16T11:57:41 IST" duration-ms="5969">
+      <class name="automation_testing.LoginTest">
+        <test-method signature="practiceLoginTest()[pri:0, instance:automation_testing.LoginTest@732c2a62]" started-at="2024-01-16T11:57:35 IST" name="practiceLoginTest" finished-at="2024-01-16T11:57:41 IST" duration-ms="5921" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- practiceLoginTest -->
+      </class> <!-- automation_testing.LoginTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>
